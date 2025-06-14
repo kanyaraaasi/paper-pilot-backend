@@ -10,6 +10,7 @@ const standardRoutes = require('./routes/standard');
 const subjectRoutes = require('./routes/subject');
 const questionRoutes = require('./routes/question');
 const testRoutes = require('./routes/test');
+const seedData = require('./utils/seedData');
 
 dotenv.config();
 
@@ -22,7 +23,7 @@ app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true }));
 
 // Database connection
-mongoose.connect(`mongodb+srv://admin123:admin123@paperpilot.7xgba1u.mongodb.net/`, {
+mongoose.connect('mongodb+srv://admin123:admin123@paperpilot.7xgba1u.mongodb.net/', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 })
@@ -59,5 +60,7 @@ app.use('*', (req, res) => {
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
+
+// seedData()
 
 module.exports = app;
