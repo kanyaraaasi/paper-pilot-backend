@@ -23,7 +23,8 @@ app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true }));
 
 // Database connection
-mongoose.connect('mongodb+srv://admin123:admin123@paperpilot.7xgba1u.mongodb.net/', {
+const DB_NAME = 'dev'; // <-- your custom DB name
+mongoose.connect(`mongodb+srv://admin123:admin123@paperpilot.7xgba1u.mongodb.net/${DB_NAME}`, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 })
@@ -58,6 +59,6 @@ app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
 
-// seedData()
+seedData()
 
 module.exports = app;
