@@ -24,7 +24,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // Database connection
 const DB_NAME = 'dev'; // <-- your custom DB name
-mongoose.connect(`mongodb+srv://admin123:admin123@paperpilot.7xgba1u.mongodb.net/${DB_NAME}`, {
+mongoose.connect(`mongodb+srv://admin123:admin123@paperpilot.7xgba1u.mongodb.net/${DB_NAME}?retryWrites=true&w=majority`, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 })
