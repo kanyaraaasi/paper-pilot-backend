@@ -10,7 +10,7 @@ const standardRoutes = require('./routes/standard');
 const subjectRoutes = require('./routes/subject');
 const questionRoutes = require('./routes/question');
 const testRoutes = require('./routes/test');
-const seedData = require('./utils/seedData');
+// const seedData = require('./utils/seedData');
 
 dotenv.config();
 
@@ -32,12 +32,17 @@ mongoose.connect(`mongodb+srv://admin123:admin123@paperpilot.7xgba1u.mongodb.net
 .catch(err => console.error('MongoDB connection error:', err));
 
 // Routes
-app.use('/api/academic-years', academicYearRoutes);
-app.use('/api/batches', batchRoutes);
-app.use('/api/standards', standardRoutes);
-app.use('/api/subjects', subjectRoutes);
-app.use('/api/questions', questionRoutes);
-app.use('/api/tests', testRoutes);
+app.use('/api/auth', require('./routes/auth'));
+app.use('/api/institutes', require('./routes/institute'));
+app.use('/api/academic-years', require('./routes/academicYear'));
+app.use('/api/batches', require('./routes/batch'));
+app.use('/api/standards', require('./routes/standard'));
+app.use('/api/subjects', require('./routes/subject'));
+app.use('/api/questions', require('./routes/question'));
+app.use('/api/tests', require('./routes/test'));
+// app.use('/api/test-results', require('./routes/testResut'));
+// app.use('/api/students', require('./routes/student'));
+// app.use('/api/dashboard', require('./routes/dashboard'));
 
 // Health check route
 app.get('/api/health', (req, res) => {
