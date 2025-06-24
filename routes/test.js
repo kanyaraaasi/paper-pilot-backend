@@ -85,28 +85,28 @@ router.get('/:id', authenticateInstitute, async (req, res) => {
 // Create new test
 router.post('/', authenticateInstitute, checkPermission('create_tests'), async (req, res) => {
   try {
-    const { questions, ...testData } = req.body;
+    const { selectedQestions, ...testData } = req.body;
     
     // Verify all questions belong to institute
-    const questionIds = questions.map(q => q.question);
-    const validQuestions = await Question.find({
-      _id: { $in: questionIds },
-      institute: req.instituteId
-    });
+    // const questionIds = questions.map(q => q.question);
+    // const validQuestions = await Question.find({
+    //   _id: { $in: questionIds },
+    //   institute: req.instituteId
+    // });
 
-    if (validQuestions.length !== questionIds.length) {
-      return res.status(400).json({ 
-        message: 'Some questions are invalid or not accessible',
-        code: 'INVALID_QUESTIONS'
-      });
-    }
+    // if (validQuestions.length !== questionIds.length) {
+    //   return res.status(400).json({ 
+    //     message: 'Some questions are invalid or not accessible',
+    //     code: 'INVALID_QUESTIONS'
+    //   });
+    // }
 
     // Calculate total marks
-    const totalMarks = questions.reduce((sum, q) => sum + (q.marks || 1), 0);
+    const totalMarks = selectedQestions.reduce((sum, q) => sum + (q.marks || 1), 0);
 
     const test = new Test({
       ...testData,
-      questions,
+      selectedQestions,
       totalMarks,
       institute: req.instituteId,
       createdBy: req.user?._id
