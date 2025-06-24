@@ -85,7 +85,7 @@ router.get('/:id', authenticateInstitute, async (req, res) => {
 // Create new test
 router.post('/', authenticateInstitute, checkPermission('create_tests'), async (req, res) => {
   try {
-    const { selectedQestions, ...testData } = req.body;
+    const { selectedQuestions, ...testData } = req.body;
     
     // Verify all questions belong to institute
     // const questionIds = questions.map(q => q.question);
@@ -102,11 +102,11 @@ router.post('/', authenticateInstitute, checkPermission('create_tests'), async (
     // }
 
     // Calculate total marks
-    const totalMarks = selectedQestions.reduce((sum, q) => sum + (q.marks || 1), 0);
+    const totalMarks = selectedQuestions.reduce((sum, q) => sum + (q.marks || 1), 0);
 
     const test = new Test({
       ...testData,
-      selectedQestions,
+      selectedQuestions,
       totalMarks,
       institute: req.instituteId,
       createdBy: req.user?._id
