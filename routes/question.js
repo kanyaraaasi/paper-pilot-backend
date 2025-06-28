@@ -51,6 +51,23 @@ router.get('/', async (req, res) => {
   }
 });
 
+router.delete('/subject/:subjectId', async (req, res) => {
+  try {
+    const result = await Question.updateMany(
+      { subject: req.params.subjectId, isActive: true },
+      { isActive: false, lastModifiedBy: req.body.lastModifiedBy }
+    );
+
+    res.json({
+      message: `${result.modifiedCount} questions deleted for subject`,
+      deletedCount: result.modifiedCount
+    });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+
 // Get questions by subject and chapter
 router.get('/subject/:subjectId/chapter/:chapterId', async (req, res) => {
   try {
