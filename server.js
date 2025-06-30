@@ -11,6 +11,7 @@ const subjectRoutes = require('./routes/subject');
 const questionRoutes = require('./routes/question');
 const testRoutes = require('./routes/test');
 // const seedData = require('./utils/seedData');
+const fileRoutes = require('./routes/fileRoutes');
 
 dotenv.config();
 
@@ -24,7 +25,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // Database connection
 const DB_NAME = 'dev'; // <-- your custom DB name
-mongoose.connect(`mongodb+srv://admin123:admin123@paperpilot.7xgba1u.mongodb.net/${DB_NAME}`, {
+mongoose.connect(`${process.env.MONGO_URL}/${DB_NAME}`, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 })
@@ -40,6 +41,8 @@ app.use('/api/standards', require('./routes/standard'));
 app.use('/api/subjects', require('./routes/subject'));
 app.use('/api/questions', require('./routes/question'));
 app.use('/api/tests', require('./routes/test'));
+app.use('/api/files', fileRoutes);
+
 // app.use('/api/test-results', require('./routes/testResut'));
 // app.use('/api/students', require('./routes/student'));
 // app.use('/api/dashboard', require('./routes/dashboard'));
