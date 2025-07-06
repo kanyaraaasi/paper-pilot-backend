@@ -24,8 +24,8 @@ app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true }));
 
 // Database connection
-const DB_NAME = 'dev'; // <-- your custom DB name
-mongoose.connect(`${process.env.MONGO_URL}/${DB_NAME}`, {
+// const DB_NAME = 'dev'; // <-- your custom DB name
+mongoose.connect(`${process.env.MONGO_URL}`, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 })
