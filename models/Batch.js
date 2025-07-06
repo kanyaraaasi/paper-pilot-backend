@@ -1,3 +1,4 @@
+// Updated models/Batch.js (with institute reference)
 const mongoose = require('mongoose');
 
 const batchSchema = new mongoose.Schema({
@@ -9,12 +10,16 @@ const batchSchema = new mongoose.Schema({
   code: {
     type: String,
     required: true,
-    unique: true,
     trim: true
   },
   academicYear: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'AcademicYear',
+    required: true
+  },
+  institute: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Institute',
     required: true
   },
   startDate: {
@@ -45,6 +50,6 @@ const batchSchema = new mongoose.Schema({
   timestamps: true
 });
 
-batchSchema.index({ academicYear: 1, code: 1 }, { unique: true });
+batchSchema.index({ code: 1, institute: 1 }, { unique: true });
 
 module.exports = mongoose.model('Batch', batchSchema);

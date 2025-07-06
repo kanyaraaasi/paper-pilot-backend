@@ -19,6 +19,26 @@ router.get('/', async (req, res) => {
   }
 });
 
+// Bulk create standards
+router.post('/bulk', async (req, res) => {
+  try {
+    const standards = req.body;
+
+    if (!Array.isArray(standards) || standards.length === 0) {
+      return res.status(400).json({ message: 'Request body must be a non-empty array of standards.' });
+    }
+
+    const insertedStandards = await Standard.insertMany(standards, { ordered: false });
+    res.status(201).json(insertedStandards);
+  } catch (error) {
+    if (error.name === 'BulkWriteError') {
+      return res.status(400).json({ message: 'Some standards could not be added due to duplicates or validation errors.', error });
+    }
+    res.status(500).json({ message: error.message });
+  }
+});
+
+
 // Create new standard
 router.post('/', async (req, res) => {
   try {
