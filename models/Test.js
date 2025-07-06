@@ -1,3 +1,4 @@
+// Updated models/Test.js (with institute reference)
 const mongoose = require('mongoose');
 
 const selectedChapterSchema = new mongoose.Schema({
@@ -75,6 +76,11 @@ const testSchema = new mongoose.Schema({
     ref: 'Subject',
     required: true
   },
+  institute: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Institute',
+    required: true
+  },
   duration: {
     type: String,
     required: true
@@ -119,18 +125,18 @@ const testSchema = new mongoose.Schema({
     default: 'draft'
   },
   createdBy: {
-    type: String,
-    trim: true
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
   },
   lastModifiedBy: {
-    type: String,
-    trim: true
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
   }
 }, {
   timestamps: true
 });
 
-testSchema.index({ academicYear: 1, batch: 1, subject: 1 });
-testSchema.index({ status: 1, createdAt: -1 });
+testSchema.index({ institute: 1, academicYear: 1, batch: 1, subject: 1 });
+testSchema.index({ institute: 1, status: 1, createdAt: -1 });
 
 module.exports = mongoose.model('Test', testSchema);

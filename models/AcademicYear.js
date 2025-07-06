@@ -1,10 +1,10 @@
+// Updated models/AcademicYear.js (with institute reference)
 const mongoose = require('mongoose');
 
 const academicYearSchema = new mongoose.Schema({
   year: {
     type: String,
     required: true,
-    unique: true,
     trim: true
   },
   startDate: {
@@ -13,6 +13,11 @@ const academicYearSchema = new mongoose.Schema({
   },
   endDate: {
     type: Date,
+    required: true
+  },
+  institute: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Institute',
     required: true
   },
   isActive: {
@@ -26,5 +31,8 @@ const academicYearSchema = new mongoose.Schema({
 }, {
   timestamps: true
 });
+
+// Compound index for unique year per institute
+academicYearSchema.index({ year: 1, institute: 1 }, { unique: true });
 
 module.exports = mongoose.model('AcademicYear', academicYearSchema);

@@ -21,12 +21,12 @@ const questionSchema = new mongoose.Schema({
   type: {
     type: String,
     required: true,
-    enum: ['MCQ', 'Short Answer', 'Long Answer', 'Fill in the Blanks', 'True/False', 'Match the Following', 'Numerical']
+    // enum: ['MCQ', 'Short Answer', 'Long Answer', 'Fill in the Blanks', 'True/False', 'Match the Following', 'Numerical']
   },
   difficulty: {
     type: String,
     required: true,
-    enum: ['Easy', 'Medium', 'Hard']
+    // enum: ['Easy', 'Medium', 'Hard']
   },
   marks: {
     type: Number,
@@ -65,7 +65,7 @@ const questionSchema = new mongoose.Schema({
   },
   bloomsLevel: {
     type: String,
-    enum: ['Remember', 'Understand', 'Apply', 'Analyze', 'Evaluate', 'Create'],
+    // enum: ['Remember', 'Understand', 'Apply', 'Analyze', 'Evaluate', 'Create'],
     default: 'Understand'
   },
   isActive: {

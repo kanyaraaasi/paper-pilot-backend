@@ -4,30 +4,34 @@
     "description": "Backend API for Paper Generator System",
     "main": "server.js",
     "scripts": {
-      "start": "node server.js",
-      "dev": "nodemon server.js",
-      "seed": "node -e 'require(\"./utils/seedData\")().then(() => process.exit(0)).catch(err => { console.error(err); process.exit(1); })'",
-      "test": "jest"
+        "start": "node server.js",
+        "dev": "nodemon server.js",
+        "seed": "node -e 'require(\"./utils/seedData\")().then(() => process.exit(0)).catch(err => { console.error(err); process.exit(1); })'",
+        "test": "jest"
     },
     "dependencies": {
-      "express": "^4.18.2",
-      "mongoose": "^7.5.0",
-      "cors": "^2.8.5",
-      "dotenv": "^16.3.1",
-      "jsonwebtoken": "^9.0.2",
-      "express-validator": "^7.0.1"
+        "@supabase/supabase-js": "^2.50.2",
+        "bcryptjs": "^3.0.2",
+        "cors": "^2.8.5",
+        "crypto": "^1.0.1",
+        "dotenv": "^16.6.1",
+        "express": "^4.21.2",
+        "express-validator": "^7.0.1",
+        "jsonwebtoken": "^9.0.2",
+        "mongoose": "^7.8.7",
+        "multer": "^2.0.1"
     },
     "devDependencies": {
-      "nodemon": "^3.0.1",
-      "jest": "^29.6.2"
+        "jest": "^29.6.2",
+        "nodemon": "^3.0.1"
     },
     "keywords": [
-      "nodejs",
-      "express",
-      "mongodb",
-      "paper-generator",
-      "education"
+        "nodejs",
+        "express",
+        "mongodb",
+        "paper-generator",
+        "education"
     ],
     "author": "Your Name",
     "license": "MIT"
-  }
+}
